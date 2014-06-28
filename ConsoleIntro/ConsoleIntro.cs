@@ -36,6 +36,7 @@ namespace ConsoleIntro
     //MainMenu class creates a while loop which displays and control the main menu and exit criteria
     class ConsoleIntro
     {
+
         //This is a program entry point. Every program needs an entry point; in C#, that is the 'Main' function.
         //Here we will create a loop that displays a mainmenu. When the user presses a selection, the
         //function will hand-off control to the right class. When the user presses Escape, the program exits.
@@ -55,8 +56,10 @@ namespace ConsoleIntro
                         runWhoAreYou();
                         break;
                     case 3:     //Variables
+                        runBasicVariables();
                         break;
                     case 4:     //What time
+                        runWhatTime();
                         break;
                     case 5:     //Math is easy
                         break;
@@ -71,6 +74,10 @@ namespace ConsoleIntro
             }
         }
 
+        /// <summary>
+        /// Creates the tutorial's main menu, returning the user's selection
+        /// </summary>
+        /// <returns>1-7 for an option choice, or 99 for quit</returns>
         private static int runMainMenu()
         {
             //we are going to create Strings which make our main menu options, then we will output
@@ -125,15 +132,20 @@ namespace ConsoleIntro
             return 99;
         }
 
+        /// <summary>
+        /// A basic hello world example
+        /// </summary>
         private static void runHelloWorld()
         {
             Console.Clear();
             Console.WriteLine("Hello World, it's C#!");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey(true);
-            Console.Clear();
+
+            closeModule();
         }
 
+        /// <summary>
+        /// This method prints a menu asking for a first/last name, and then spits out a greeting with the given values.
+        /// </summary>
         private static void runWhoAreYou()
         {
             Console.Clear();
@@ -164,8 +176,56 @@ namespace ConsoleIntro
 
             //if we reach here, we have a first and last name. Output, and clean up.
             Console.WriteLine("Hello, {0}! It's nice to meet one of the fine {1} clan again!", firstName, lastName);
+
+            closeModule();
+        }
+
+        /// <summary>
+        /// A simple example of variables and working with 'em
+        /// </summary>
+        private static void runBasicVariables()
+        {
+            //clear the console
+            Console.Clear();
+
+            //create 3 variables to hold our 3 variables
+            int x = 1;
+            int y = 101;
+            int z = 1001;
+
+            //print in number format to the console:
+            Console.WriteLine("X is " + x); //an implicit toString happens here
+            Console.WriteLine("Y is " + y.ToString());  //this is what is really happening above
+            Console.WriteLine("Z is {0}", z);   //this is the preferred way of writing console output
+
+            closeModule();
+        }
+
+        /// <summary>
+        /// Shows time and how to work with basic time functions
+        /// </summary>
+        private static void runWhatTime()
+        {
+            //clear console
+            Console.Clear();
+
+            Console.WriteLine("System time is represented as the number of 'ticks' (100 nanoseconds is 1 tick)");
+            Console.WriteLine("since Midnight, Jan 1st, in the year 0001.");
+            Console.WriteLine("There have been {0} ticks since the start of System time.", 
+                System.DateTime.Now.ToFileTime().ToString("N"));
+
+            closeModule();
+        }
+
+        /// <summary>
+        /// This cleans up modules by clearing screen and displaying necessary info
+        /// </summary>
+        private static void closeModule()
+        {
+
+            Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
-            Console.ReadKey(true);
+            Console.ReadKey();
             Console.Clear();
         }
     }
